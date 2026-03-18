@@ -1,4 +1,4 @@
-# Junior Platfrom Engineer Task
+# Junior Platform Engineer Task
 ![Build Status](https://github.com/matthewbbarthet/mbb_jpe_task_hornet/actions/workflows/docker-publish.yml/badge.svg)
 
 Node.js Hello World application served behind an Nginx reverse proxy containerised with docker with CI/CD to be automatically built and published to Docker Hub via GitHub Actions
@@ -39,7 +39,7 @@ nginx/
 ## Architecture
 Browse -> port 80 -> Nginx -> port 3000 -> Node.js Hello World app
 
-Nginx acts as a reverse proxy, meaning Nginx recieves all requests and selectively forwards them to the nodejs application. In this way, thek Node.js container is never directly exposed to the host machine, and Nginx acts as a controlled entry point handling connection management and security headers before any request reaches the application.
+Nginx acts as a reverse proxy, meaning Nginx receives all requests and selectively forwards them to the nodejs application. In this way, the Node.js container is never directly exposed to the host machine, and Nginx acts as a controlled entry point handling connection management and security headers before any request reaches the application.
 
 ## CI/CD Pipeline
 The GitHub Actions workflow .github/workflows/docker-publish.yml triggers on every push to any branch and performs the following steps:
@@ -50,15 +50,15 @@ The GitHub Actions workflow .github/workflows/docker-publish.yml triggers on eve
 5. Build and push - builds the production image and publishes to Docker Hub
 The image is published with two tags:
 - :latest - always points to the most recent build
-- :<showt-sha> - immutable tage tied ot a specific commit for rollback
+- :<short-sha> - immutable tag tied to a specific commit for rollback
 
 ### Note
 I tried implementing trivy security scan but I could not get it to work. Apparently it has been very unreliable since March 1st of this year when it was compromised by an autonomous AI
 
 ## Docker Image
-The image uses a multi-stage build to keep hte final image lean
+The image uses a multi-stage build to keep the final image lean
 - builder stage - copies source files
-- production stage - runs as a non-root user ith only the files needed
+- production stage - runs as a non-root user with only the files needed
 
 ```bash
 docker run -p 3000:3000 matthewbbarthet/mbb_jpe_task_hornet:latest
