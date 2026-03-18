@@ -50,7 +50,7 @@ The GitHub Actions workflow .github/workflows/docker-publish.yml triggers on eve
 5. Build and push - builds the production image and publishes to Docker Hub
 The image is published with two tags:
 - :latest - always points to the most recent build
-- :<short-sha> - immutable tag tied to a specific commit for rollback
+- :short-sha - immutable tag tied to a specific commit for rollback
 
 ### Note
 I tried implementing trivy security scan but I could not get it to work. Apparently it has been very unreliable since March 1st of this year when it was compromised by an autonomous AI
