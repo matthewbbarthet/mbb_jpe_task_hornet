@@ -10,11 +10,14 @@ const server = http.createServer(function (req, res) {
   res.end('Hello World');
 });
 
-process.on('SIGTERM', () => {
+function shutdown() {
   server.close(() => {
     console.log('Server closed gracefully');
     process.exit(0);
   });
 });
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
